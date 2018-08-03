@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.2.0",
+    "push-dir": "^0.4.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue2-dropzone": "^3.2.2",
