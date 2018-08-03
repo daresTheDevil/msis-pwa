@@ -8,8 +8,8 @@ const DefaultContainer = () => import('@/containers/DefaultContainer')
 const Dashboard = () => import('@/views/Dashboard')
 
 // Views - MSIS
-const MsisModules = () => import('@/views/msis/Modules')
-const MsisReports = () => import('@/views/msis/Reports')
+const MsisModules = () => import('@/views/msis/modules/Modules')
+const MsisReports = () => import('@/views/msis/reports/Reports')
 
 // Views - Components
 

@@ -14,94 +14,36 @@
         </v-list>
       </v-toolbar>
 
-      <v-subheader class="mt-3 grey--text text--darken-1">APPLICATIONS</v-subheader>
+      <v-subheader class="mt-3 grey--text text--darken-1">MODULES</v-subheader>
 
       <v-list>
-        <v-list-group prepend-icon="school" no-action>
-          <v-list-tile slot="activator">
-            <v-list-tile-title>MSIS Core</v-list-tile-title>
-          </v-list-tile>
-
-          <v-list-tile to="/msismodules" class="secondary">
-            <v-list-tile-title>Modules</v-list-tile-title>
-          </v-list-tile>
-
-          <v-list-tile to="/msisreports" class="secondary">
-            <v-list-tile-title>Reports</v-list-tile-title>
-          </v-list-tile>
-        </v-list-group>
-        <v-divider></v-divider>
-        <v-list-group prepend-icon="library_books" no-action>
-          <v-list-tile slot="activator">
-            <v-list-tile-title>Textbooks</v-list-tile-title>
-          </v-list-tile>
-
-          <v-list-tile class="secondary">
-            <v-list-tile-title>Modules</v-list-tile-title>
-          </v-list-tile>
-
-          <v-list-tile class="secondary">
-            <v-list-tile-title>Reports</v-list-tile-title>
-          </v-list-tile>
-        </v-list-group>
-        <v-divider></v-divider>
-        <v-list-group prepend-icon="how_to_reg" no-action>
-          <v-list-tile slot="activator">
-            <v-list-tile-title>Licensure</v-list-tile-title>
-          </v-list-tile>
-
-          <v-list-tile class="secondary">
-            <v-list-tile-title>Modules</v-list-tile-title>
-          </v-list-tile>
-
-          <v-list-tile class="secondary">
-            <v-list-tile-title>Reports</v-list-tile-title>
-          </v-list-tile>
-        </v-list-group>
-        <v-divider></v-divider>
-
-        <v-list-group prepend-icon="poll" no-action>
-          <v-list-tile slot="activator">
-            <v-list-tile-title>Data</v-list-tile-title>
-          </v-list-tile>
-
-          <v-list-tile class="secondary">
-            <v-list-tile-title>Modules</v-list-tile-title>
-          </v-list-tile>
-
-          <v-list-tile class="secondary">
-            <v-list-tile-title>Reports</v-list-tile-title>
-          </v-list-tile>
-
-        </v-list-group>
+        <v-list-tile v-for="module in modules" :key="module">
+          <v-list-tile-title>{{ module.text }}</v-list-tile-title>
+        </v-list-tile>
       </v-list>
+
     </v-navigation-drawer>
-    <v-toolbar color="primary" fixed clipped-left app>
+    <v-toolbar color="primary" dark fixed clipped-left app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title class="mr-5 align-center">
         <span class="title">MSIS</span>
       </v-toolbar-title>
-      <!-- <v-autocomplete
-      :items="items"
-      :loading="isLoading"
-      :search-input.sync="search"
-      slot="extension"
-      v-if="isExtended"
-      hide-details
-      item-text="name"
-      item-value="symbol"
-      label="I want to..."
-      color="white"
-      autofocus
-      flat
-    >
-      </v-autocomplete> -->
-      <v-spacer></v-spacer>
-      <v-btn light color="warning" to="pages/login">Login</v-btn>
-      <v-btn icon>
-        <!--  @click.stop="isExtended = !isExtended"> -->
-        <v-icon>search</v-icon>
-      </v-btn>
+      <v-toolbar-items>
+        <v-btn flat to="pages/login">Login</v-btn>
+
+        <v-menu offset-y>
+          <v-btn flat slot="activator">MSIS</v-btn>
+          <v-list>
+            <v-list-tile v-for="msislink in msislinks" :key="msislink" :to="msislink.link">
+              <v-list-tile-title>{{ msislink.text }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+
+        <v-spacer></v-spacer>
+
+        <v-btn flat>ELMS</v-btn>
+      </v-toolbar-items>
     </v-toolbar>
     <v-content>
       <router-view></router-view>
@@ -121,6 +63,25 @@
     },
     data: () => ({
       drawer: true,
+      modules: [
+        { text: 'Student', link: '' },
+        { text: 'Personnel', link: '' },
+        { text: 'District/School', link: '' },
+        { text: 'Calendar', link: '' },
+        { text: 'Career/Technical', link: '' },
+        { text: 'SPED', link: '' },
+        { text: 'Personnel Snapshot', link: '' },
+        { text: 'FETS', link: '' },
+        { text: 'Federal Programs', link: '' }
+      ],
+      msislinks: [
+        { text: 'Dashboard', link: '' },
+        { text: 'Modules', link: 'msismodules' },
+        { text: 'Reports', link: 'msisreports' },
+        { text: 'Maintenance', link: '' },
+        { text: 'Security', link: '' },
+        { text: 'Block', link: '' }
+      ],
       items: [{
         icon: 'school',
         text: 'MSIS Core',
@@ -151,43 +112,6 @@
         ['Read', 'insert_drive_file'],
         ['Update', 'update'],
         ['Delete', 'delete']
-      ],
-      items2: [{
-        picture: 28,
-        text: 'Joseph'
-      },
-      {
-        picture: 38,
-        text: 'Apple'
-      },
-      {
-        picture: 48,
-        text: 'Xbox Ahoy'
-      },
-      {
-        picture: 58,
-        text: 'Nokia'
-      },
-      {
-        picture: 78,
-        text: 'MKBHD'
-      }
-      ],
-      menuItems: [{
-        title: 'Home',
-        path: '/home',
-        icon: 'home'
-      },
-      {
-        title: 'Sign Up',
-        path: '/signup',
-        icon: 'face'
-      },
-      {
-        title: 'Sign In',
-        path: '/signin',
-        icon: 'lock_open'
-      }
       ]
     }),
     props: {
