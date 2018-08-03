@@ -97,8 +97,7 @@
     >
       </v-autocomplete> -->
       <v-spacer></v-spacer>
-      <v-btn color="primary" to="pages/login">Login</v-btn>
-      <v-btn color="secondary" @click="setLayout('app-layout')">App Layout</v-btn>
+      <v-btn light color="warning" to="pages/login">Login</v-btn>
       <v-btn icon>
         <!--  @click.stop="isExtended = !isExtended"> -->
         <v-icon>search</v-icon>
